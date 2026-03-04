@@ -1,7 +1,10 @@
 const $carousel = document.querySelector(".carousel"),
     $carouselInner = document.querySelector(".carousel-inner"),
     $nextBtn = document.querySelector("#nextBtn"),
-    $prevBtn = document.querySelector("#prevBtn");
+    $prevBtn = document.querySelector("#prevBtn"),
+    $paginationCurrent = document.querySelector("#current"),
+    $paginationTotal = document.querySelector("#total");
+
 
 let config = { gap: 10, widthPercent: 20 };
 let isTransitioning = false;
@@ -24,8 +27,10 @@ function staticPosition() {
         slide.classList.add("absolute");
         slide.style.left = `${x}px`;
 
-        if (posIndex === 0) slide.classList.add('active');
-        else slide.classList.remove('active');
+        if (posIndex === 0) {
+            slide.classList.add('active');
+            $paginationCurrent.innerHTML = slide.querySelector("span").innerHTML;
+        } else slide.classList.remove('active');
     });
 }
 
@@ -35,6 +40,8 @@ function staticPosition() {
 function initCarousel() {
     const $initialSlides = document.querySelectorAll(".slide");
     const count = $initialSlides.length;
+
+    $paginationTotal.innerHTML = count;
 
     $initialSlides.forEach(($slide, index) => {
         let pos;
