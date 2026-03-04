@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+@use "base/fonts" as *;
+@use "base/variable" as *;
+@use "base/mixin" as *;
+@use "base/reset" as *;
+@use "base/container" as *;
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: to_vw(12);
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.carousel-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: to_vw(8);
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    z-index: 99;
+
+    span {
+        font-family: "AustinNewsDeckWeb", sans-serif;
+    }
+
+    button {
+        padding: 0 to_vw(2);
+        margin: 0 to_vw(2);
+        font-family: "AustinNewsDeckWeb", sans-serif;
+        font-style: italic;
+
+        &:not(.active):hover {
+            text-decoration: underline;
+            opacity: .5;
+        }
+
+        &.active {
+            text-decoration: underline;
+            color: #ff8aa4;
+        }
+    }
+}
+
+.carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 26.6vw;
+
+    &.init {
+        .carousel-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            margin: 0 auto;
+            gap: to_vw(10);
+        }
+    }
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: calc(20vw - to_vw(10));
+    height: 100%;
+
+    &.absolute {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 100%;
+    }
+
+    &.transition {
+        transition: left 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease, visibility 0.5s ease;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &.active {
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        font-size: 0;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: to_vw(40);
+        height: to_vw(20);
+        background: #fff;
+        z-index: 1;
+        font-family: "AustinNewsDeckWeb", sans-serif;
+        font-weight: bold;
+        color: #000;
+        @include fontSize(12);
+    }
+}
+
+.controls {
+    display: flex;
+    gap: to_vw(10);
+
+    button {
+        font-family: "AustinNewsDeckWeb", sans-serif;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
