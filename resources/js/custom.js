@@ -41,7 +41,7 @@ function initCarousel() {
     const $initialSlides = document.querySelectorAll(".slide");
     const count = $initialSlides.length;
 
-    $paginationTotal.innerHTML = count;
+    $paginationTotal.innerHTML = String(count);
 
     $initialSlides.forEach(($slide, index) => {
         let pos;
